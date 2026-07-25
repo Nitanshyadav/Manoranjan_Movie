@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { dummyShowsData } from '../../assets/assets';
 import { dateFormat } from '../../lib/dataFormat';
-import Title from  '../../components/admin/Title.jsx';
 import Loading from '../../components/Loading';
 import { useAppContext } from '../../context/AppContext';
 
