@@ -28,14 +28,14 @@ const AddShows = () => {
             setNowPlayingMovies(data.movies)
           }
       }catch(error){
-        console/error('Error fetching movies:', error)
+        console.error('Error fetching movies:', error)
       }
     };
 
     const handleDateTimeAdd=()=>{
       if(!dateTimeInput) return;
       const [date, time] =dateTimeInput.split("T");
-      if(!date || time) return;
+      if(!date || !time) return;
 
       setDateTimeSelection((prev)=>{
         const times =prev[date] || [];
@@ -71,12 +71,12 @@ const AddShows = () => {
           const showInput = Object.entries(dateTimeSelection).map(([date, time]) => ({date, time}));
 
           const payload = {
-            movieId: selectedMovie,
+            movieId: selectedMovies,
             showInput,
             showPrice: Number(showPrice)
           }
 
-          const { data } = await axios.post('/api/show/add', payload, {headers: {Authorization: `Bearer ${await getToken}`}})
+          const { data } = await axios.post('/api/show/add', payload, {headers: {Authorization: `Bearer ${await getToken()}`}})
 
           if(data.success){
             toast.success(data.message)
@@ -117,7 +117,7 @@ const AddShows = () => {
                       <p className="text-gray-300">{kConerter(movie.vote_count)} Votes</p>
                   </div>
                 </div>
-                {setSelectedMovie === movie.id && (
+                {selectedMovies === movie.id && (
                   <div className="absolute top-2 right-2 flex items-center justify-center bg-primary h-6 w-6 rounded">
                     <CheckIcon className="w-4 h-4 text-white" strokeWidth={2.5}/>
                     </div>
