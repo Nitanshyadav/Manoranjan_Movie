@@ -15,10 +15,12 @@ const ListBookings = () => {
 
   const getAllBookings=async()=>{
     try{
-      const { data } = await axios.get("/api/admin/all-shows",{
+      const { data } = await axios.get("/api/admin/all-bookings",{
         headers: {Authorization: `Bearer ${await getToken()}`}
       });
+      if(data.success){
       setBookings(data.bookings)
+    }
     }catch(error){
       console.error(error);
     }
@@ -37,7 +39,7 @@ const ListBookings = () => {
       <Title text1="List" text2="Bookings"/>
       <div className="max-4xl mt-6 overflow-x-auto">
         <table className="w-full border-collapse rounded-md overflow-hidden text-nowrap">
-          <thred>
+          <thread>
             <tr className="bg-primary/20 text-left text-white">
               <th className="p-2 font-medium pl-5">User Name</th>
               <th className="p-2 font-medium">Movie Name</th>
@@ -45,7 +47,7 @@ const ListBookings = () => {
               <th className="p-2 font-medium">Seats</th>
               <th className="p-2 font-medium">Amount</th>
             </tr>
-          </thred>
+          </thread>
           <tbody className="text-sm font-light">
             {bookings.map((item,index)=>(
               <tr key={index} className="border-b border-primary/20 bg-primary/5 even:bg-primary/10">
